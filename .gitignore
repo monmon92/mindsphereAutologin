@@ -1,0 +1,6 @@
+#config.json
+chromedriver
+geckodriver
+geckodriver.log
+*pyc
+__pycache__
