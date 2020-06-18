@@ -151,6 +151,12 @@ def mainloop():
             checkElement()
             if checkLogin() == True or statusCode(currentURL()) !=200:
                 site_login()
+    except (KeyboardInterrupt, SystemExit):
+        driver.stop_client()
+        driver.close()
+        driver.quit()
+        exit()
+        #raise
     except:
         print("Main failed - retrying Main")
         mainloop()
