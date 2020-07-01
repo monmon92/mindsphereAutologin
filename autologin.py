@@ -139,6 +139,13 @@ def checkElement(): # looks for mindsphere ID on page as an additional check inc
         print('no mindsphere content detected - time for refresh')
         return False
 
+def checkMSError(): # looking for error class on MindSphere error pages
+    try:
+        driver.find_element_by_class_name('mindsphere-error-page')
+        driver.refresh()
+        print('error class found')        
+    except:
+        print('no error class found')
 
 def mainloop():
     try:
@@ -149,6 +156,7 @@ def mainloop():
             print('check login page',checkLogin())
             print("Current Time =", now().strftime("%H:%M:%S"))
             checkElement()
+            checkMSError()
             if checkLogin() == True or statusCode(currentURL()) !=200:
                 site_login()
     except (KeyboardInterrupt, SystemExit):
