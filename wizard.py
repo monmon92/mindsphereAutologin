@@ -65,7 +65,7 @@ def settingsQuestions():
     if ((len(userEmail.split('@')) != 2)):    #validate email address
         print("Sorry, the the script was expecting a valid email address, but you submitted: {0}\nExiting...".format(userEmail))
         exit()
-    elif (len((userEmail.split('@'))[1].split('.')) != 2):
+    elif (len((userEmail.split('@'))[1].split('.')) < 2):
         print("Sorry, the the script was expecting a valid email address, but you submitted: {0}\nExiting...".format(userEmail))
         exit()
     settings['email'] = userEmail
