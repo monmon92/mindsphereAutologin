@@ -11,11 +11,11 @@ import wget
 settings = {}
 
 def validateSystem():
-    if (platform.system() != "Windows") and (platform.system() != "Linux"):
-        print("Sorry, this script currently only supports Windows and Linux")
+    if (platform.system() != "Windows") and (platform.system() != "Linux") and (platform.system() != "Darwin"):
+        print("Sorry, this script currently only supports Windows, Linux and Darwin Kernels")
         exit()
-    if (platform.architecture()[0] != "64bit") and (platform.architecture()[0] != "32bit"):
-        print("Sorry, this script currently only supports AMD64, x86 and ARM7+ architectures")
+    if (platform.architecture()[0] != "64bit") and (platform.architecture()[0] != "32bit") and (sys.maxsize < (2**31 - 1)):
+        print("Sorry, this script currently only supports AMD64, x86, ARM7+ and Mac 32/64 bit architectures")
         exit()
 
 def settingsQuestions():
@@ -91,9 +91,9 @@ def writeSettings(settings):
         json.dump(settings, outfile, indent=4, sort_keys=True)
 
 def installBrowserEngine(settings):
-    OS = 'arm' if (platform.architecture()[1] == "ELF") else 'win' if (platform.system() == "Windows") else 'linux'
+    OS = 'arm' if (platform.architecture()[1] == "ELF") else 'win' if (platform.system() == "Windows") else 'macos' if (platform.system() == "Darwin") else 'linux'
     extension = 'zip' if (platform.system() == "Windows") else 'tar.gz'
-    arch = '7hf' if (platform.architecture()[1] == "ELF") else platform.architecture()[0][0:2]
+    arch = '7hf' if (platform.architecture()[1] == "ELF") else '' if (platform.system() == "Darwin") else platform.architecture()[0][0:2]
     if settings['browser'] == "firefox":
         #check if already exists here
         #check if raspi - use most recent compatible build - static URL unless you want to build from source lol, just kinda shoved this in so fingers crossed.
@@ -110,7 +110,7 @@ def installBrowserEngine(settings):
         os.remove('./geckodriver-{0}-{1}{2}.{3}'.format(settings['version'],OS,arch,extension))
     else:   #chrome
         #check if already exists here
-        chromeSystem = 'win32' if (OS == 'win') else 'linux64'
+        chromeSystem = 'win32' if (OS == 'win') else'mac64' if (OS == 'macos') else 'linux64'
         chromeSubVersion = "{0}.{1}.{2}".format((settings['version'].split('.')[0]),(settings['version'].split('.')[1]),(settings['version'].split('.')[2]))
         latestCompatibleChromeURL = 'https://chromedriver.storage.googleapis.com/LATEST_RELEASE_{0}'.format(chromeSubVersion)
         latestCompatibleChromeVersion = ((requests.get(latestCompatibleChromeURL)).content).decode("utf-8") 
