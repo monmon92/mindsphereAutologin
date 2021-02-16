@@ -19,12 +19,23 @@ On first run, this script will step you through a wizard to automatically downlo
 
 #### Install Required Python packages:
 
-**Windows and Linux**
+Navigate to the folder containing the script, then run the following:
+
+**Windows, Mac and Linux**
 ```sh
 pip3 install -r requirements.txt
 ```
+#### Additional step for Mac users (first time only):
+Go to:
+- Applications
+- Python 3.X
+- Run "Install Certificates.command"
+
+Once this is complete you can run the script.
 
 #### Running Script:
+
+Navigate to the folder containing the script, then run the following:
 
 **Windows**
 ```cmd
@@ -36,8 +47,33 @@ py autologin.py
 python3 autologin.py
 ```
 
+**Mac**
+```sh
+python3 autologin.py
+```
+
+
 #### Running on startup:
 
 **Windows**
 
 The setup wizard can optionally place a windows batch file in your C:\Users\\$(USER)\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup that will automatically launch this script on boot. This batch file relies on the script remaining in the directory it was when you ran the wizard, so if you move this script's folder, please re-run the wizard.
+
+#### Running the Wizard again
+
+If the setup Wizard needs to be run again, like in the case of choosing a different page to keep logged in, you will need to navigate to the script folder and run the command:
+
+**Windows**
+```cmd
+py wizard.py
+```
+
+**Linux**
+```sh
+python3 wizard.py
+```
+
+**Mac**
+```sh
+python3 wizard.py
+```
