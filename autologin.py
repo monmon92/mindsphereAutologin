@@ -12,11 +12,16 @@ from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import wizard
 import base64
 import sys
+import os
 
 from datetime import datetime
 
 def now():
     return datetime.now()
+
+file_path = os.path.dirname(os.path.realpath(__file__))
+
+print('You are here:' + file_path)
 
 runWizardFlag = False
 if (len(sys.argv) > 1):
@@ -50,7 +55,8 @@ if (('wizardRan' not in settings) or not (settings['wizardRan']) or (runWizardFl
 rootURL = settings['url']
 
 #Selenium driver setup
-executablePath = ("./chromedriver" if (settings['browser'] == 'chrome') else "./geckodriver") + (".exe" if platform.system() == 'Windows' else "")
+executablePath = (file_path + "/chromedriver" if (settings['browser'] == 'chrome') else file_path + "/geckodriver") + (".exe" if platform.system() == 'Windows' else "")
+print("executablePath: " + executablePath)
 options = (webdriver.ChromeOptions() if (settings['browser'] == 'chrome') else webdriver.FirefoxOptions())
 options.add_argument("--start-maximized" if (platform.system() == "Windows") else "--kiosk")
 driver = (webdriver.Chrome(executablePath, chrome_options=options) if (settings['browser'] == 'chrome') else webdriver.Firefox(executable_path=executablePath,firefox_options=options))
