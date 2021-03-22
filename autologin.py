@@ -30,7 +30,7 @@ if (len(sys.argv) > 1):
         +"\nThis script runs at 30 seconds intervals."
         +"\nOn first run, this script will step you through a wizard to automatically download the latest web engine for either Firefox (recommended) or Chrome, as well as to get your login details. (NOTE: Your MindSphere password is not stored in plaintext, but base64 is not far off)"
         +"\nYou may run the wizard again or alter settings by modifying the entries in config.json (ie. setting 'wizardRan': false), or by launching 'autologin.py --wizard'"
-        +"\nSupported OSes: Windows, Linux"
+        +"\nSupported OSes: Windows, Linux, MAC"
         +"\nSupported architectures: AMD64, x86"
         +"\nNOTE: This project is not endorsed by Siemens and may be breaching MindSphere's terms and conditions. It is given to you as is."
         +"\n\n-h, --help                 Show help again"
